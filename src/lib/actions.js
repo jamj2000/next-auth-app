@@ -2,12 +2,41 @@
 import { AuthError } from "next-auth";
 import { signIn, signOut } from "@/auth"
 import { getUserByEmail } from "@/lib/user"
+import bcrypt from 'bcryptjs'
+
 
 const DEFAULT_LOGIN_REDIRECT = '/dashboard'
 
-export async function register () {
-    return
+export async function register (formData) {
+    const name = formData.get('name')
+    const email = formData.get('email')
+    const password = formData.get('password')
+ 
+    // Comprobamos si el usuario ya está registrado
+    const user = await getUserByEmail(email)
+
+    if (user) {
+        console.log('error');
+        return { error: 'El email ya está registrado' }
+    }
+
+    // Encriptamos password 
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    // Guardamos credenciales en base datos
+    await prisma.user.create({
+        data: {
+            name,
+            email,
+            password: hashedPassword
+        }
+    })
+
+    return { success: "Registro correcto" }
 }
+
+
+
 
 export async function login (formData, callbackUrl) {
     const email = formData.get('email')

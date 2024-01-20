@@ -54,7 +54,7 @@ section.auth {
 
 .auth form {
   width: 350px;
-  background-color: antiquewhite;
+  background-color: rgb(236, 246, 254);
   padding: 40px;
   border-radius: 10px;
   border: solid 1px lightgray;
@@ -65,7 +65,7 @@ section.auth {
 
 .social {
   width: 350px;
-  background-color: antiquewhite;
+  background-color: rgb(236, 246, 254);
   padding: 40px;
   border-radius: 10px;
   border: solid 1px lightgray;

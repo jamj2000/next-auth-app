@@ -41,7 +41,6 @@ export const proveedores = {
                 if (user) {  // && user.emailVerified
                     const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
                     if (passwordsMatch) return user
-                    // if (passwordsMatch) return true
                 } else {
                     return null
                 }
